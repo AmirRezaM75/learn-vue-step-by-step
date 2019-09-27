@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Listners</title>
+</head>
+<body>
+<div id="root">
+    <ul>
+        <!-- <li v-for="name in names">{{name}}</li> -->
+        <li v-for="name in names" v-text="name"></li>
+    </ul>
+    <input type="text" v-model="newName">
+
+    <!-- <button v-on:click="addName">Submit</button> -->
+    <button @click="addName">Submit</button>
+
+    <p>New name is: {{newName}}</p>
+</div>
+<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+<script type="text/javascript">
+    let data = {
+        message: 'Hello Vue.js',
+        newName: '',
+        names: [
+            'Twitch',
+            'Trundle',
+            'John'
+        ]
+    };
+
+    var app = new Vue({
+        el: '#root', // Surface Area
+        data: data, // Model
+        methods: {
+            // Older syntax:
+            // addName: function() {
+            //     // Do something
+            // }
+
+            // 2015 syntax
+            addName() {
+                this.names.push(this.newName); // this.data.names is WRONG
+                this.newName = '';
+            }
+        }
+    });
+</script>
+</body>
+</html>
