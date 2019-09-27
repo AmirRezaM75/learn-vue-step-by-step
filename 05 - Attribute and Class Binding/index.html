@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Attribute and Class Binding </title>
+	<style>
+		.btn {
+		    display: inline-block;
+		    font-weight: 400;
+		    text-align: center;
+		    white-space: nowrap;
+		    vertical-align: middle;
+		    -webkit-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    user-select: none;
+		    border: 1px solid transparent;
+		    padding: .375rem .75rem;
+		    font-size: 1rem;
+		    line-height: 1.5;
+		    border-radius: .25rem;
+		    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		}
+		.text-warning {
+			color: yellow;
+		}
+		.btn-secondary {
+		    background-color: #6c757d;
+		    border-color: #6c757d;
+		}
+		.btn-primary {
+		    background-color: #007bff;
+		    border-color: #007bff;
+		}
+	</style>
+</head>
+<body>
+	<!-- https://vuejs.org/v2/guide/class-and-style.html -->
+
+	<div id="root">
+		<!-- We can not interpolate inside attributes -->
+		<!-- <button title="{{title}}">Click here</button> -->
+
+		<button v-bind:title="title">Click here</button>
+
+		<!-- Shorthand version -->
+		<button :title="title">Click here</button>
+
+		<button class="btn" v-bind:class="[staticClass, {'btn-primary': status, 'btn-secondary': !status}]" @click='changeStutus'>Toggle me</button>
+	</div>
+	
+	<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+	<script type="text/javascript">
+		new Vue({
+			el: '#root',
+			data: {
+				staticClass: 'text-warning',
+				status: true,
+				title: 'Title'
+			},
+			methods: {
+				changeStutus() {
+					this.status = ! this.status;
+				}
+			}
+
+		});
+	</script>
+</body>
+</html>
