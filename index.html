@@ -7,14 +7,15 @@
 <body>
 <div id="root">
     <ul>
-<!--        <li v-for="name in names">{{name}}</li>-->
+        <!-- <li v-for="name in names">{{name}}</li> -->
         <li v-for="name in names" v-text="name"></li>
     </ul>
-    <input type="text" id="input" v-model="newName">
+    <input type="text" v-model="newName">
+
     <!-- <button v-on:click="addName">Submit</button> -->
     <button @click="addName">Submit</button>
 
-    <p>this is your message: {{message}}</p>
+    <p>New name is: {{newName}}</p>
 </div>
 <script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 <script type="text/javascript">
@@ -30,9 +31,9 @@
 
     var app = new Vue({
         el: '#root', // Surface Area
-        data: data,
+        data: data, // Model
         methods: {
-            // Older syntax
+            // Older syntax:
             // addName: function() {
             //     // Do something
             // }
