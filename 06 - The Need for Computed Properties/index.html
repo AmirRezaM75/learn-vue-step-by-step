@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1 id="text">This is reversed text</h1>
+	
+	<div id="root">
+		<h2 v-text="message.split('').reverse().join('')"></h2>
+		<h3>
+			{{message.split('').reverse().join('')}}
+		</h3>
+		<h4>{{ reversedMessage }}</h4>
+
+		<h1>All Tasks</h1>
+		<ul>
+			<li v-for='task in tasks'>{{task.description}}</li>
+		</ul>
+		
+		<!-- 
+			We can use if statement to filter them
+			But it's still not clear and no caching out of the box.
+		-->
+		<h1>Completed Tasks</h1>
+		<ul>
+			<li v-for='task in tasks' v-if="task.completed" v-text="task.description"></li>
+		</ul>
+
+		<h1>Incomplete Tasks</h1>
+		<ul>
+			<li v-for='task in incompleteTasks'>{{task.description}}</li>
+		</ul>
+	</div>
+
+	<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+
+	<!-- Vanilla JS -->
+
+	<script type="text/javascript">
+		var textElement = document.querySelector('#text');
+		var inverse = textElement.innerHTML.split('').reverse().join('');
+		textElement.innerHTML = inverse;
+	</script>
+
+	<script type="text/javascript">
+		new Vue({
+			el: '#root',
+			data: {
+				message: 'Hello World',
+				tasks: [
+					{description: 'Buy Shoe', completed: true},
+					{description: 'Buy Pencil', completed: false},
+					{description: 'Go to Store', completed: true},
+					{description: 'Visit Dr', completed: true},
+				]
+			},
+			computed: {
+				reversedMessage() {
+					return this.message.split('').reverse().join('')
+				},
+				// 2015 syntax
+				
+				// incompleteTasks() {
+				// 	return this.tasks.filter(task=> ! task.completed)
+				// },
+
+				// old syntax
+				incompleteTasks() {
+					return this.tasks.filter(function(task){
+						return ! task.completed;
+					})
+				},
+			}
+		});
+	</script>
+</body>
+</html>
