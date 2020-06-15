@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03 - Lists</title>
+</head>
+<body>
+    <div id="root">
+        <input type="text" id="input">
+        <button>Submit</button>
+        <ul>
+            <li v-for="name in names" v-text="name"></li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script>
+        Vue.config.devtools = true;
+        let app =
+            new Vue({
+            el: '#root',
+            data: {
+                names: ['Amir', 'Vahid', 'Alireza']
+            },
+            mounted() {
+                document.querySelector('button').addEventListener('click', function () {
+                    let input = document.querySelector('#input');
+                    app.names.push(input.value);
+                    input.value = '';
+                })
+            }
+        });
+    </script>
+</body>
+</html>
