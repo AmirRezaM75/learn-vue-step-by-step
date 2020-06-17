@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Attribute and Class Binding </title>
+	<title>Attribute and Class Binding</title>
 	<style>
 		.btn {
 		    display: inline-block;
@@ -46,9 +46,9 @@
 		<!-- Shorthand version -->
 		<button :title="title">Click here</button>
 
-		<button class="btn" v-bind:class="[staticClass, {'btn-primary': status, 'btn-secondary': !status}]" @click='changeStutus'>Toggle me</button>
+		<button class="btn" v-bind:class="[staticClass, {'btn-primary': status, 'btn-secondary': !status}]" @click='changeStatus'>Toggle me</button>
 	</div>
-	
+
 	<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 	<script type="text/javascript">
 		new Vue({
@@ -59,7 +59,7 @@
 				title: 'Title'
 			},
 			methods: {
-				changeStutus() {
+				changeStatus() {
 					this.status = ! this.status;
 				}
 			}

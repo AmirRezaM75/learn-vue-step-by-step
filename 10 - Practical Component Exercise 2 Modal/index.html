@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>10 - Components</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
+	<style type="text/css"> body { padding-top: 40px; } </style>
+</head>
+<body>
+	<div id="root" class="container">
+		<button class="button is-primary modal-button"
+				data-target="modal"
+				@click="showModal = true"
+				aria-haspopup="true">Modal</button>
+		<modal v-show="showModal" @close="showModal = false">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+			Accusantium dolor doloremque ducimus error fuga fugit iure numquam ut!
+		</modal> <!-- Custom directives (events) -->
+	</div>
+
+	<script type="text/javascript" src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
