@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>12 - Communication</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
+	<style type="text/css"> body { padding-top: 40px; } </style>
+</head>
+<body>
+	<div id="root" class="container">
+		<coupon v-on:applied="couponApplied"></coupon>
+		<!--
+		You need some way on your root instance to be notified when coupon has been applied.
+		Our root instance wants to be notified if the user did provide a valid coupon, I need to be able to something too.
+		(flash message etc.)
+		v-on is a good way to communicate between child and parent.
+		-->
+	</div>
+
+	<script type="text/javascript" src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
