@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>15 - Inline Templates</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
+	<style type="text/css"> body { padding-top: 40px; } </style>
+</head>
+<body>
+	<div id="root" class="container">
+		<progress-view inline-template>
+			<div>
+				<h1>Your progress is {{ completionRate }}%</h1>
+				<button @click="completionRate+=10">update</button>
+			</div>
+		</progress-view>
+	</div>
+
+	<script type="text/javascript" src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
