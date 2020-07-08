@@ -13,7 +13,10 @@ class Errors {
     }
 
     clear(field) {
-        delete this.errors[field];
+        if (field)
+            return delete this.errors[field];
+
+        this.errors = {};
     }
 
     has(field) {
@@ -25,25 +28,66 @@ class Errors {
     }
 }
 
+class Form {
+    constructor(data) {
+        this.originalData = data;
+
+        for (let field in data) {
+            this[field] = data[field]
+            // this['name'] ~= this.name
+            // axios['post']() ~= axios.post()
+        }
+
+        this.errors = new Errors()
+    }
+
+
+    data() {
+        let data = Object.assign({}, this);
+
+        delete data.originalData;
+        delete data.errors;
+
+        return data;
+
+    }
+
+    submit(requestType, url) {
+        axios[requestType](url, this.data())
+            .then(this.onSuccess.bind(this))
+            .catch(this.onFail.bind(this)); // error automatically will be passed to function
+    }
+
+
+    reset() {
+        for (let field in this.originalData) {
+            this[field] = '';
+        }
+    }
+
+    onSuccess(response) {
+        alert(response.data.message);
+        this.errors.clear();
+        this.reset();
+    }
+
+    onFail(error) {
+        this.errors.save(error.response.data.errors)
+    }
+
+}
+
 new Vue({
     el: '#root',
     data: {
-        name: '',
-        description: '',
-        errors: new Errors()
+        form: new Form({
+            name: '',
+            description: '',
+        })
     },
     methods: {
         onSubmit() {
-            /*axios.post('/projects', {
-                name: this.name,
-                description: this.description
-            });*/
-
-            axios.post('/projects', this.$data)
-                .then(response => alert(response.data.message))
-                .catch(error => this.errors.save(error.response.data.errors));
-            /* The problem is when the console.log tries to output the error,
-            the string representation is printed, not the object structure, so you do not see the .response property*/
+            this.form.submit('post', '/projects');
         }
     }
 });
