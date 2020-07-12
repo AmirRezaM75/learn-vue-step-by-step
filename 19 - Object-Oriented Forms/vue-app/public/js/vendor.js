@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./resources/js/app.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -453,39 +453,14 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 
 /***/ }),
 
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 0:
+/*!***********************!*\
+  !*** multi vue axios ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.esm.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _core_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./core/Form */ \"./resources/js/core/Form.js\");\n\n\n // We probably wanna reference 'axios' & 'Form' all over our project\n\nwindow.axios = axios__WEBPACK_IMPORTED_MODULE_1___default.a;\nwindow.Form = _core_Form__WEBPACK_IMPORTED_MODULE_2__[\"default\"];\nnew vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]({\n  el: '#root',\n  data: {\n    form: new _core_Form__WEBPACK_IMPORTED_MODULE_2__[\"default\"]({\n      name: '',\n      description: ''\n    })\n  },\n  methods: {\n    onSubmit: function onSubmit() {\n      this.form.submit('post', '/projects').then(function (data) {\n        return console.log(data);\n      })[\"catch\"](function (errors) {\n        return console.log(errors);\n      });\n    }\n  }\n});\n\n//# sourceURL=webpack:///./resources/js/app.js?");
-
-/***/ }),
-
-/***/ "./resources/js/core/Errors.js":
-/*!*************************************!*\
-  !*** ./resources/js/core/Errors.js ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nvar Errors = /*#__PURE__*/function () {\n  function Errors() {\n    _classCallCheck(this, Errors);\n\n    this.errors = {};\n  }\n\n  _createClass(Errors, [{\n    key: \"save\",\n    value: function save(errors) {\n      this.errors = errors;\n    }\n  }, {\n    key: \"get\",\n    value: function get(field) {\n      if (this.errors[field]) return this.errors[field][0];\n    }\n  }, {\n    key: \"clear\",\n    value: function clear(field) {\n      if (field) return delete this.errors[field];\n      this.errors = {};\n    }\n  }, {\n    key: \"has\",\n    value: function has(field) {\n      return this.errors.hasOwnProperty(field);\n    }\n  }, {\n    key: \"any\",\n    value: function any() {\n      return Object.keys(this.errors).length > 0;\n    }\n  }]);\n\n  return Errors;\n}();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Errors);\n\n//# sourceURL=webpack:///./resources/js/core/Errors.js?");
-
-/***/ }),
-
-/***/ "./resources/js/core/Form.js":
-/*!***********************************!*\
-  !*** ./resources/js/core/Form.js ***!
-  \***********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Errors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Errors */ \"./resources/js/core/Errors.js\");\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\nvar Form = /*#__PURE__*/function () {\n  function Form(data) {\n    _classCallCheck(this, Form);\n\n    this.originalData = data;\n\n    for (var field in data) {\n      this[field] = data[field]; // this['name'] ~= this.name\n      // axios['post']() ~= axios.post()\n    }\n\n    this.errors = new _Errors__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n  }\n\n  _createClass(Form, [{\n    key: \"data\",\n    value: function data() {\n      var data = {};\n\n      for (var property in this.originalData) {\n        data[property] = this[property];\n      }\n\n      return data;\n    }\n  }, {\n    key: \"submit\",\n    value: function submit(requestType, url) {\n      var _this = this;\n\n      return new Promise(function (resolve, reject) {\n        axios[requestType](url, _this.data()).then(function (response) {\n          _this.onSuccess(response.data);\n\n          resolve(response.data);\n        })[\"catch\"](function (error) {\n          _this.onFail(error.response.data);\n\n          reject(error.response.data);\n        });\n      });\n    }\n  }, {\n    key: \"reset\",\n    value: function reset() {\n      for (var field in this.originalData) {\n        this[field] = '';\n      }\n\n      this.errors.clear();\n    }\n  }, {\n    key: \"onSuccess\",\n    value: function onSuccess(data) {\n      alert(data.message);\n      this.reset();\n    }\n  }, {\n    key: \"onFail\",\n    value: function onFail(errors) {\n      this.errors.save(errors.errors);\n    }\n  }]);\n\n  return Form;\n}();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Form);\n\n//# sourceURL=webpack:///./resources/js/core/Form.js?");
+eval("__webpack_require__(/*! vue */\"./node_modules/vue/dist/vue.esm.js\");\nmodule.exports = __webpack_require__(/*! axios */\"./node_modules/axios/index.js\");\n\n\n//# sourceURL=webpack:///multi_vue_axios?");
 
 /***/ })
 
